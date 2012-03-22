@@ -1,0 +1,37 @@
+.PHONY: clean
+
+USE_OCAMLFIND = true
+
+OCAMLPACKS[] =
+  batteries
+
+#NATIVE_ENABLED = $(OCAMLOPT_EXISTS)
+NATIVE_ENABLED = $(not $(OCAMLOPT_EXISTS))
+BYTE_ENABLED = $(not $(NATIVE_ENABLED))
+
+OCAMLFLAGS = -thread
+OCAML_LINK_FLAGS = -linkpkg
+
+FILES[] =
+  int64_op
+  type
+  syntax
+  parser
+  lexer
+  main
+
+GEN_FILES[] =
+  parser.ml
+  parser.mli
+  lexer.ml
+  lexer.mli
+
+OCAML_OTHER_LIBS[] =
+  threads
+
+PROGRAM = main
+
+.DEFAULT: $(OCamlProgram $(PROGRAM), $(FILES))
+
+clean :
+        rm -f $(PROGRAM) $(GEN_FILES) *.cm[iox] *.o *~ *.omc .omakedb .omakedb.lock *.cmxa *.a *.opt *.run *.annot

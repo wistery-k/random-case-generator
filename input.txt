@@ -1,0 +1,5 @@
+type a = [0, 50]
+type c = [a-z]
+n:a
+m:a
+s:c[n][m]
